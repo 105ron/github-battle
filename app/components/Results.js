@@ -4,10 +4,11 @@ var queryString = require('query-string');
 var api = require('../utils/api');
 var Link = require('react-router-dom').Link;
 var PlayerPreview = require('./PlayerPreview');
+var Loading = require('./Loading')
 
 function Profile (props) {
   var info = props.info;
-  
+
   return (
     <PlayerPreview username={info.login} avatar={info.avatar_url}>
       <ul className='space-list-items'>
@@ -56,7 +57,6 @@ class Results extends React.Component {
   }
   componentDidMount () {
     var players = queryString.parse(this.props.location.search);
-    console.log(players)
 
     api.battle([
       players.playerOneName,
@@ -88,7 +88,7 @@ class Results extends React.Component {
     var loading = this.state.loading;
     
     if (loading === true) {
-      return <p>Loading</p>
+      return <Loading />
     }
 
     if (error) {
